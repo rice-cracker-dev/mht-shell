@@ -1,0 +1,18 @@
+{
+  "name": "astal-shell",
+  "scripts": {
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "astal": "/nix/store/88kb2cyzj1hwad8s43wzdkafyp3hsh31-astal-gjs/share/astal/gjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "prettier": "^3.5.3",
+    "typescript": "5.7",
+    "typescript-eslint": "^8.28.0"
+  }
+}
