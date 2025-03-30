@@ -1,0 +1,50 @@
+@use '../theme.scss' as t;
+@use 'sass:map' as map;
+@use 'sass:color' as color;
+
+.btn {
+  min-height: 28px;
+  padding: 0 8px;
+
+  border-radius: 9999px;
+
+  transition-duration: 150ms;
+  transition-property: color, background-color;
+}
+
+.btn.btn-icon {
+  min-height: 28px;
+  min-width: 28px;
+  padding: 0;
+}
+
+@each $name, $color in t.$colors {
+  $base: map.get($color, "base");
+  $content: map.get($color, "content");
+
+  .btn-#{$name} {
+    background-color: $base;
+    color: $content;
+
+    &.btn-ghost {
+      background-color: transparent;
+      color: t.$base-content;
+    }
+
+    &:hover {
+      background-color: color.scale($base, $lightness: 5%);
+    
+      &.btn-ghost {
+        background-color: color.adjust($base, $alpha: -0.5);
+      }
+    }
+
+    &:active {
+      background-color: color.scale($base, $lightness: 10%);
+
+      &.btn-ghost {
+        background-color: color.adjust($base, $alpha: -0.25);
+      }
+    }
+  }
+}

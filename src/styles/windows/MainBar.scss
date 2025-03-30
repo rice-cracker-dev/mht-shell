@@ -1,0 +1,9 @@
+@use '../theme.scss' as t;
+
+window.MainBar {
+  background-color: t.$base-100;
+}
+
+window.MainBar .main {
+  padding: 4px 8px;
+}

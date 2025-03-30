@@ -1,3 +1,12 @@
+@use 'components';
+@use 'windows';
+@use 'theme.scss' as t;
+
 * {
   all: unset;
 }
+
+window {
+  color: t.$base-content;
+}
+

@@ -1,0 +1,16 @@
+$base-100: rgb(24, 25, 38);
+$base-200: rgb(30, 32, 48);
+$base-300: rgb(110, 115, 141);
+$base-content: rgb(202, 211, 245);
+
+$colors: (
+  "primary": (
+    "base": rgb(198, 160, 246),
+    "content": rgb(24, 25, 38),
+  ),
+  "neutral": (
+    "base": rgb(54, 58, 79),
+    "content": rgb(202, 211, 245),
+  ),
+);
+

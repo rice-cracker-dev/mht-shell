@@ -1,0 +1,8 @@
+@use 'sass:map' as map;
+@use '../theme.scss' as t;
+
+@each $name, $color in t.$colors {
+  .text-#{$name} {
+    color: map.get($color, "base");
+  }
+}

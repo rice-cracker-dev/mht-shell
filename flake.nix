@@ -34,10 +34,9 @@
     packages.${system} = {
       default = ags.lib.bundle {
         inherit pkgs;
-        src = ./.;
+        src = ./src;
         name = "mht-shell";
-        entry = "src/app.ts";
-        gtk4 = true;
+        entry = "app.ts";
 
         # additional libraries and executables to add to gjs' runtime
         inherit extraPackages;
@@ -47,6 +46,7 @@
     devShells.${system} = {
       default = pkgs.mkShell {
         buildInputs = [
+          pkgs.inotify-tools
           pkgs.bun
 
           # includes astal3 astal4 astal-io by default

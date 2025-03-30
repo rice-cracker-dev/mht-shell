@@ -1,28 +1,30 @@
-import { App, Astal, Gtk, Gdk } from 'astal/gtk3';
-import { Variable } from 'astal';
-
-const time = Variable('').poll(1000, 'date');
+import { App, Astal, Gdk } from 'astal/gtk4';
+import { TimeWidget } from '../widgets/TimeWidget';
+import { HomeWidget } from '../widgets/HomeWidget';
+import { SystemTrayWidget } from '../widgets/SystemTrayWidget';
+import { NetworkWidget } from '../widgets/NetworkWidget';
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
 
   return (
     <window
-      className="Bar"
+      visible
+      css_classes={["MainBar"]}
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}
       application={App}
     >
-      <centerbox>
-        <button onClicked="echo hello" halign={Gtk.Align.CENTER}>
-          Welcome to AGS!
-        </button>
-        <box />
-        <button onClicked={() => print('hello')} halign={Gtk.Align.CENTER}>
-          <label label={time()} />
-        </button>
-      </centerbox>
+      <box css_classes={["main"]}>
+        <box hexpand></box>
+        <box spacing={4}>
+          <SystemTrayWidget />
+          <NetworkWidget />
+          <TimeWidget />
+          <HomeWidget />
+        </box>
+      </box>
     </window>
   );
 }

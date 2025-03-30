@@ -1,0 +1,6 @@
+@use '../theme.scss' as t;
+
+image {
+  color: t.$base-content;
+  -gtk-icon-size: 14px;
+}
