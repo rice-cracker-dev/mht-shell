@@ -34,9 +34,9 @@
     packages.${system} = {
       default = ags.lib.bundle {
         inherit pkgs;
-        src = ./src;
+        src = ./.;
         name = "mht-shell";
-        entry = "app.ts";
+        entry = "src/app.ts";
         gtk4 = true;
 
         # additional libraries and executables to add to gjs' runtime

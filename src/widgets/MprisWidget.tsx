@@ -1,7 +1,7 @@
 import { bind } from 'astal';
 import { Gtk } from 'astal/gtk4';
 import AstalMpris from 'gi://AstalMpris';
-import Pango from 'gi://Pango?version=1.0';
+import Pango from 'gi://Pango';
 
 const mpris = AstalMpris.get_default();
 
