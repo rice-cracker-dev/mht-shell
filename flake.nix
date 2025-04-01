@@ -37,6 +37,7 @@
         src = ./src;
         name = "mht-shell";
         entry = "app.ts";
+        gtk4 = true;
 
         # additional libraries and executables to add to gjs' runtime
         inherit extraPackages;
