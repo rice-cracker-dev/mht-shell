@@ -1,6 +1,7 @@
-import { bind, Variable, interval } from 'astal';
+import { bind, Binding, Variable, interval, exec } from 'astal';
 import AstalNetwork from 'gi://AstalNetwork';
 import { getIndexFromPercentage, getPercentageFromRange, wrapAround } from '../utils/math';
+import { Gtk } from 'astal/gtk4';
 
 const network = AstalNetwork.get_default();
 
@@ -18,29 +19,40 @@ const WifiLabelConnecting = () => {
   });
 
   return (
-    <image icon_name={bind(iconIndex).as((i) => wifiStrengthIcons[i])} onDestroy={() => time.cancel()} />
+    <image
+      icon_name={bind(iconIndex).as((i) => wifiStrengthIcons[i])}
+      onDestroy={() => time.cancel()}
+    />
   );
 };
 
-const WifiLabelConnected = (wifi: AstalNetwork.Wifi) => {
-  const strengthIcon = bind(wifi, 'strength').as((strength) => {
-    const perc = getPercentageFromRange(strength, 0, 100);
+const NetworkStrength = ({ strength, css_classes }: { strength: Binding<number>, css_classes?: string[] }) => {
+  const strengthIcon = strength.as((s) => {
+    const perc = getPercentageFromRange(s, 0, 100);
     return wifiStrengthIcons[getIndexFromPercentage(wifiStrengthIcons, perc)];
   });
 
-  return <image icon_name={strengthIcon} />;
+  return <image icon_name={strengthIcon} css_classes={css_classes} />;
 };
 
 const WifiIcon = (wifi: AstalNetwork.Wifi) => {
-  if (wifi.internet === AstalNetwork.Internet.CONNECTED) {
-    return WifiLabelConnected(wifi);
-  }
+  const wifiBind = bind(wifi, 'internet').as((internet) => {
+    if (internet === AstalNetwork.Internet.CONNECTED) {
+      return <NetworkStrength strength={bind(wifi, 'strength')} />;
+    }
 
-  if (wifi.internet === AstalNetwork.Internet.DISCONNECTED) {
-    return <image icon_name="ph-wifi-slash-symbolic" />;
-  }
+    if (internet === AstalNetwork.Internet.DISCONNECTED) {
+      return <image icon_name="ph-wifi-slash-symbolic" />;
+    }
 
-  return <WifiLabelConnecting />;
+    return <WifiLabelConnecting />;
+  });
+
+  return (
+    <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
+      {wifiBind}
+    </box>
+  );
 };
 
 // TODO: Implement this.
@@ -48,13 +60,17 @@ const WiredIcon = (wired: AstalNetwork.Wired) => {
   return <box>{wired.speed}</box>;
 };
 
-const NetworkPopover = () => { 
-}
-
 export const NetworkWidget = () => {
   const icon = bind(network, 'primary').as((p) => {
     return p === AstalNetwork.Primary.WIFI ? WifiIcon(network.wifi) : WiredIcon(network.wired);
   });
 
-  return <button css_classes={["btn", "btn-neutral", "btn-ghost", "btn-icon"]}>{icon}</button>;
+  return (
+    <button
+      onClicked={() => exec(['kitty', 'nmtui'])}
+      css_classes={['btn', 'btn-neutral', 'btn-ghost', 'btn-icon', 'btn-pill']}
+    >
+      {icon}
+    </button>
+  );
 };

@@ -2,8 +2,7 @@ import { Variable } from 'astal';
 
 export const time = Variable<Date>(new Date()).poll(
   1000,
-  ['date', '+%s'],
-  (t) => new Date(Number(t) * 1000)
+  () => new Date()
 );
 
 export const formatTime = (time: Date): string => {

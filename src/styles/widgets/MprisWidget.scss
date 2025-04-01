@@ -1,0 +1,28 @@
+@use '../theme.scss' as t;
+
+.mpris {
+  min-width: 300px;
+
+  & .cover-art {
+    opacity: 50%;
+  }
+
+  & .content {
+    padding: 0 8px;
+    background-image: linear-gradient(to left, t.$base-100, transparent);
+
+    & .song-title {
+      font-weight: bold;
+    }
+  }
+
+  & scale.progress {
+    background-color: transparent;
+    min-height: 2px;
+
+    & trough highlight {
+      background-color: t.$base-content;
+      min-height: 2px;
+    }
+  }
+}

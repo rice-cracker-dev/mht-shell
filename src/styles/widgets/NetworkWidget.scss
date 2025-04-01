@@ -1,0 +1,9 @@
+.network__connection {
+  & image.icon {
+    -gtk-icon-size: 20px;
+  }
+
+  & label.network-type {
+    opacity: 50%;
+  }
+}

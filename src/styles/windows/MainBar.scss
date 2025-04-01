@@ -1,9 +1,11 @@
 @use '../theme.scss' as t;
 
-window.MainBar {
+window.MainBar { 
   background-color: t.$base-100;
-}
 
-window.MainBar .main {
-  padding: 4px 8px;
+  & .main {
+    & .widget-right {
+      padding: 4px 8px 4px 0;
+    }
+  }
 }

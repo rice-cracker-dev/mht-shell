@@ -1,14 +1,21 @@
 import { bind } from 'astal';
+import { Gtk } from 'astal/gtk4';
 import AstalTray from 'gi://AstalTray';
 
 const tray = AstalTray.get_default();
 
 export const TrayItem = (item: AstalTray.TrayItem) => {
+  const popup = Gtk.PopoverMenu.new_from_model(item.menu_model);
+  popup.halign = Gtk.Align.CENTER
+  popup.has_arrow = false;
+
   return (
     <menubutton
-      tooltip_markup={bind(item, 'tooltipMarkup')}
-      menu_model={bind(item, 'menuModel')}
-      css_classes={["btn", "btn-neutral", "btn-ghost", "btn-icon"]}
+      popover={popup}
+      css_classes={['btn', 'btn-primary', 'btn-ghost', 'btn-icon', 'btn-pill']}
+      setup={(self) => {
+        self.insert_action_group('dbusmenu', item.actionGroup);
+      }}
     >
       <image gicon={bind(item, 'gicon')} />
     </menubutton>

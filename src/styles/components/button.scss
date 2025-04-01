@@ -6,45 +6,51 @@
   min-height: 28px;
   padding: 0 8px;
 
-  border-radius: 9999px;
+  border-radius: 8px;
 
   transition-duration: 150ms;
   transition-property: color, background-color;
-}
 
-.btn.btn-icon {
-  min-height: 28px;
-  min-width: 28px;
-  padding: 0;
-}
+  &.btn-icon {
+    min-height: 28px;
+    min-width: 28px;
+    padding: 0px;
+  }
 
-@each $name, $color in t.$colors {
-  $base: map.get($color, "base");
-  $content: map.get($color, "content");
+  &.btn-pill {
+    border-radius: 9999px;
+  }
 
-  .btn-#{$name} {
-    background-color: $base;
-    color: $content;
+  @each $name, $color in t.$colors {
+    $base: map.get($color, 'base');
+    $content: map.get($color, 'content');
 
-    &.btn-ghost {
-      background-color: transparent;
-      color: t.$base-content;
-    }
+    &.btn-#{$name} {
+      background-color: $base;
+      color: $content;
 
-    &:hover {
-      background-color: color.scale($base, $lightness: 5%);
-    
       &.btn-ghost {
-        background-color: color.adjust($base, $alpha: -0.5);
+        background-color: transparent;
+        color: t.$base-content; 
       }
-    }
 
-    &:active {
-      background-color: color.scale($base, $lightness: 10%);
+      &:hover {
+        background-color: color.scale($base, $lightness: 5%);
 
-      &.btn-ghost {
-        background-color: color.adjust($base, $alpha: -0.25);
+        &.btn-ghost {
+          background-color: color.adjust($base, $alpha: -0.5);
+        }
+      }
+
+      &:active {
+        background-color: color.scale($base, $lightness: 10%);
+
+        &.btn-ghost {
+          background-color: color.adjust($base, $alpha: -0.25);
+        }
       }
     }
   }
 }
+
+

@@ -1,0 +1,48 @@
+@use '../theme.scss' as t;
+@use 'sass:color' as color;
+@use 'sass:map' as map;
+
+popover {
+  background-color: t.$base-100;
+  border: t.$base-300 solid 1px;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 14px;
+  min-width: 300px;
+
+  label.header {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &.menu {
+    padding: 8px;
+    font-size: 12px;
+    min-width: 0;
+
+    & button.model,
+    & modelbutton {
+      $color: map.get(t.$colors, 'neutral');
+      $base: map.get($color, 'base');
+      $content: map.get($color, 'content');
+
+      background-color: transparent;
+      color: $content;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-top: 2px;
+
+      &:first-child {
+        margin-top: 0px;
+      }
+
+      &:hover {
+        background-color: color.adjust($base, $alpha: -0.5);
+      }
+
+      &:active {
+        background-color: $base;
+      }
+    }
+  }
+}
