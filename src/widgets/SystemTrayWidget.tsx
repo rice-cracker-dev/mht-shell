@@ -4,15 +4,15 @@ import AstalTray from 'gi://AstalTray';
 
 const tray = AstalTray.get_default();
 
-export const TrayItem = (item: AstalTray.TrayItem) => {
+const TrayItem = (item: AstalTray.TrayItem) => {
   const popup = Gtk.PopoverMenu.new_from_model(item.menu_model);
-  popup.halign = Gtk.Align.CENTER
+  popup.halign = Gtk.Align.CENTER;
   popup.has_arrow = false;
 
   return (
     <menubutton
       popover={popup}
-      css_classes={['btn', 'btn-primary', 'btn-ghost', 'btn-icon', 'btn-pill']}
+      css_classes={['btn', 'btn-neutral', 'btn-ghost', 'btn-icon']}
       setup={(self) => {
         self.insert_action_group('dbusmenu', item.actionGroup);
       }}
@@ -22,6 +22,12 @@ export const TrayItem = (item: AstalTray.TrayItem) => {
   );
 };
 
-export const SystemTrayWidget = () => {
-  return <box spacing={4}>{bind(tray, 'items').as((items) => items.map(TrayItem))}</box>;
+const SystemTrayWidget = () => {
+  return (
+    <box spacing={4}>
+      {bind(tray, 'items').as((items) => items.map(TrayItem))}
+    </box>
+  );
 };
+
+export default SystemTrayWidget;

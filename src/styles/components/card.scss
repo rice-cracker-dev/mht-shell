@@ -1,0 +1,14 @@
+@use '../theme.scss' as t;
+
+.card {
+  padding: 4px;
+  border-radius: 8px;
+
+  &.card-base {
+    background-color: t.$base-100;
+  }
+
+  &.card-content {
+    background-color: t.$base-200;
+  }
+}

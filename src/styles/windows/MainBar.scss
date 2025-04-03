@@ -1,7 +1,7 @@
 @use '../theme.scss' as t;
 
 window.MainBar { 
-  background-color: t.$base-100;
+  background-color: transparent;
 
   & .main {
     & .widget-right {

@@ -26,7 +26,13 @@ const WifiLabelConnecting = () => {
   );
 };
 
-const NetworkStrength = ({ strength, css_classes }: { strength: Binding<number>, css_classes?: string[] }) => {
+const NetworkStrength = ({
+  strength,
+  css_classes,
+}: {
+  strength: Binding<number>;
+  css_classes?: string[];
+}) => {
   const strengthIcon = strength.as((s) => {
     const perc = getPercentageFromRange(s, 0, 100);
     return wifiStrengthIcons[getIndexFromPercentage(wifiStrengthIcons, perc)];
@@ -60,17 +66,21 @@ const WiredIcon = (wired: AstalNetwork.Wired) => {
   return <box>{wired.speed}</box>;
 };
 
-export const NetworkWidget = () => {
+const NetworkWidget = () => {
   const icon = bind(network, 'primary').as((p) => {
     return p === AstalNetwork.Primary.WIFI ? WifiIcon(network.wifi) : WiredIcon(network.wired);
   });
 
   return (
     <button
-      onClicked={() => exec(['kitty', 'nmtui'])}
-      css_classes={['btn', 'btn-neutral', 'btn-ghost', 'btn-icon', 'btn-pill']}
+      onClicked={() =>
+        network.client.networking_set_enabled(!network.client.networking_get_enabled())
+      }
+      css_classes={['btn', 'btn-neutral', 'btn-ghost', 'btn-icon']}
     >
       {icon}
     </button>
   );
 };
+
+export default NetworkWidget;
