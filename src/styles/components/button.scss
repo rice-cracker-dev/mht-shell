@@ -11,6 +11,10 @@
   transition-duration: 150ms;
   transition-property: color, background-color;
 
+  &:disabled {
+    opacity: 50%;
+  }
+
   &.btn-icon {
     min-height: 28px;
     min-width: 28px;

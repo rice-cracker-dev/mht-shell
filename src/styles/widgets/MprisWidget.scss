@@ -1,16 +1,11 @@
 @use '../theme.scss' as t;
 
 .mpris {
-  & .cover-art {
-    opacity: 50%;
-  }
+  & .mpris-icon {
+    margin-left: 8px;
+  } 
 
-  & .content {
-    padding: 0 8px;
-    background-image: linear-gradient(to left, t.$base-100, transparent);
-  }
-
-  & scale.vertical {
+  & scale {
     background-color: transparent;
     min-height: 4px;
 

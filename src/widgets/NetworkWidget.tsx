@@ -1,4 +1,4 @@
-import { bind, Binding, Variable, interval, exec } from 'astal';
+import { bind, Binding, Variable, interval } from 'astal';
 import AstalNetwork from 'gi://AstalNetwork';
 import { getIndexFromPercentage, getPercentageFromRange, wrapAround } from '../utils/math';
 import { Gtk } from 'astal/gtk4';
@@ -6,10 +6,11 @@ import { Gtk } from 'astal/gtk4';
 const network = AstalNetwork.get_default();
 
 const wifiStrengthIcons: string[] = [
-  'ph-wifi-none-symbolic',
-  'ph-wifi-low-symbolic',
-  'ph-wifi-medium-symbolic',
-  'ph-wifi-high-symbolic',
+  'wifi-1-symbolic',
+  'wifi-2-symbolic',
+  'wifi-3-symbolic',
+  'wifi-4-symbolic',
+  'wifi-5-symbolic',
 ];
 
 const WifiLabelConnecting = () => {
@@ -48,7 +49,7 @@ const WifiIcon = (wifi: AstalNetwork.Wifi) => {
     }
 
     if (internet === AstalNetwork.Internet.DISCONNECTED) {
-      return <image icon_name="ph-wifi-slash-symbolic" />;
+      return <image icon_name="wifi-disconnected-symbolic" />;
     }
 
     return <WifiLabelConnecting />;

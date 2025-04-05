@@ -6,15 +6,15 @@ import { Variable } from 'astal';
 const wp = AstalWp.get_default();
 
 const speakerIconLevels = [
-  'ph-speaker-simple-none-symbolic',
-  'ph-speaker-simple-low-symbolic',
-  'ph-speaker-simple-high-symbolic',
+  'volume-1-symbolic',
+  'volume-2-symbolic',
+  'volume-3-symbolic',
 ];
 
 const SpeakerIconLevel = (endpoint: AstalWp.Endpoint) => {
   const derived = Variable.derive([bind(endpoint, 'volume'), bind(endpoint, 'mute')], (v, mute) => {
     if (mute) {
-      return 'ph-speaker-simple-x-symbolic';
+      return 'volume-muted-symbolic';
     }
 
     const perc = getPercentageFromRange(v, 0, 1);
